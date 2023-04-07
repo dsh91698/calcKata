@@ -23,24 +23,14 @@ class Main {
 
     public static String arabicCalc(String[] tokens) throws Exception{
         if (Integer.parseInt(tokens[0])>10 || Integer.parseInt(tokens[2])>10) throw new Exception("Wrong input: Operand is greater then 10");
-        int result;
         String operator = tokens[1];
-        switch (operator) {
-            case "+":
-                result = Integer.parseInt(tokens[0]) + Integer.parseInt(tokens[2]);
-                break;
-            case "-":
-                result = Integer.parseInt(tokens[0]) - Integer.parseInt(tokens[2]);
-                break;
-            case "*":
-                result = Integer.parseInt(tokens[0]) * Integer.parseInt(tokens[2]);
-                break;
-            case "/":
-                result = Integer.parseInt(tokens[0]) / Integer.parseInt(tokens[2]);
-                break;
-            default:
-                throw new Exception("Operator is not valid");
-        }
+        int result = switch (operator) {
+            case "+" -> Integer.parseInt(tokens[0]) + Integer.parseInt(tokens[2]);
+            case "-" -> Integer.parseInt(tokens[0]) - Integer.parseInt(tokens[2]);
+            case "*" -> Integer.parseInt(tokens[0]) * Integer.parseInt(tokens[2]);
+            case "/" -> Integer.parseInt(tokens[0]) / Integer.parseInt(tokens[2]);
+            default -> throw new Exception("Operator is not valid");
+        };
         return String.valueOf(result);
     }
 
