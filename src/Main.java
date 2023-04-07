@@ -35,7 +35,7 @@ class Main {
             case "-" -> Integer.parseInt(tokens[0]) - Integer.parseInt(tokens[2]);
             case "*" -> Integer.parseInt(tokens[0]) * Integer.parseInt(tokens[2]);
             case "/" -> Integer.parseInt(tokens[0]) / Integer.parseInt(tokens[2]);
-            default -> throw new Exception("Operator is not valid");
+            default -> throw new Exception("Operator is not valid"); // just for case
         };
         return String.valueOf(result);
     }
