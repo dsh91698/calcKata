@@ -75,17 +75,12 @@ class Main {
 
     public static void isInputValid(String[] tokens) throws Exception{
         if (tokens.length != 3) throw new Exception("Input is not valid: input two numbers and one operator only!");
-        // TODO: add check for mixed operands like "1 +II "
+        if (romanNumeralMapInput.containsKey(tokens[0]) && arabicNumeralMapInput.containsKey(tokens[2])) throw new Exception("Input is not valid: do not mix arabic and roman numbers!");
+        if (romanNumeralMapInput.containsKey(tokens[2]) && arabicNumeralMapInput.containsKey(tokens[0])) throw new Exception("Input is not valid: do not mix arabic and roman numbers!");
     }
 
     public static Boolean isInputRoman(String[] tokens) {
-        if (romanNumeralMapInput.containsKey(tokens[0]) && romanNumeralMapInput.containsKey(tokens[2])) {
-            return true;
-        }
-//        else {
-//            System.out.println("The map does not contain the key 'II'");
-//        }
-        return false;
+        return romanNumeralMapInput.containsKey(tokens[0]) && romanNumeralMapInput.containsKey(tokens[2]);
     }
 
 
