@@ -1,6 +1,9 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Scanner;
+
+import static java.util.Map.entry;
 
 class Main {
 
@@ -17,26 +20,26 @@ class Main {
             "X", 10
     );
 
-    static Map<String, Integer> arabicNumeralMapInput = Map.of(
-            "1", 1,
-            "2", 2,
-            "3", 3,
-            "4", 4,
-            "5", 5,
-            "6", 6,
-            "7", 7,
-            "8", 8,
-            "9", 9,
-            "10", 10
+    static Map<String, Integer> arabicNumeralMapInput = Map.ofEntries(
+            entry("0", 0),
+            entry("1", 1),
+            entry("2", 2),
+            entry("3", 3),
+            entry("4", 4),
+            entry("5", 5),
+            entry("6", 6),
+            entry("7", 7),
+            entry("8", 8),
+            entry("9", 9),
+            entry("10", 10)
     );
-
 
 
     public static void main(String[] args) throws Exception{
         Scanner input = new Scanner(System.in);
 
         System.out.println("Input two numbers and operation, like \"1 + 1\" or \" I + II\" ");
-        System.out.println("Use \"+\", \"-\",\"*\", \"/\" only  ");
+        System.out.println("Use \"+\", \"-\",\"*\", \"/\" operators only  ");
 
         String strInput = input.nextLine().replace(" ", ""); // Read user input, remove spaces
         System.out.println("Input is: " + strInput); // Output user input
@@ -57,22 +60,31 @@ class Main {
     }
 
     public static String arabicCalc(String[] tokens) throws Exception{
-        //TODO: add two variables for both operands
         if (Integer.parseInt(tokens[0])>10 || Integer.parseInt(tokens[2])>10) throw new Exception("Wrong input: Operand is greater then 10");
+        if ( (arabicNumeralMapInput.get(tokens[2]) == 0) && (Objects.equals(tokens[1], "/")) ) throw new Exception("Do not divide by Zero, it is dangerous!"); //case divide by zero
+
         String operator = tokens[1];
         int result = switch (operator) {
             case "+" -> Integer.parseInt(tokens[0]) + Integer.parseInt(tokens[2]);
             case "-" -> Integer.parseInt(tokens[0]) - Integer.parseInt(tokens[2]);
             case "*" -> Integer.parseInt(tokens[0]) * Integer.parseInt(tokens[2]);
             case "/" -> Integer.parseInt(tokens[0]) / Integer.parseInt(tokens[2]);
-            default -> throw new Exception("Operator is not valid"); // just for case
+            default -> throw new Exception("Operator is not valid => " + operator); // just for case ... %
         };
         return String.valueOf(result);
     }
 
     public static String romanCalc(String[] tokens) throws Exception {
-            int operand1 = romanNumeralMapInput.get(tokens[0]);// get numeric value from Map by roman as key
-            int operand2 = romanNumeralMapInput.get(tokens[2]);
+
+//        try { // case if in input roman numbers greater then 10, like XX, XI ... which passing input regex
+//            int operand1 = romanNumeralMapInput.get(tokens[0]);// try to get numeric value from Map by roman as key
+//            int operand2 = romanNumeralMapInput.get(tokens[2]);
+//        } catch (Exception e) {
+//            throw new Exception("Wrong input: operand is greater then 10 or does not fit input format!");
+//        }
+
+        int operand1 = romanNumeralMapInput.get(tokens[0]);// get numeric value from Map by roman as key
+        int operand2 = romanNumeralMapInput.get(tokens[2]);
         String operator = tokens[1];
         int result = switch (operator) {
             case "+" -> operand1 + operand2;
@@ -82,6 +94,8 @@ class Main {
             default -> throw new Exception("Operator is not valid"); // just for case
         };
         if (result < 1) throw new Exception("Wrong output: roman numbers does not include Null or negative number");
+//        System.out.println("result ->" + result);
+        RomanOutput RomanOutput = new RomanOutput(); // make instance
         return RomanOutput.romanFromArabic(result);
     }
 
@@ -89,17 +103,12 @@ class Main {
         if (tokens.length != 3) throw new Exception("Input is not valid: input two numbers and one operator only!");
         if (romanNumeralMapInput.containsKey(tokens[0]) && arabicNumeralMapInput.containsKey(tokens[2])) throw new Exception("Input is not valid: do not mix arabic and roman numbers!");
         if (romanNumeralMapInput.containsKey(tokens[2]) && arabicNumeralMapInput.containsKey(tokens[0])) throw new Exception("Input is not valid: do not mix arabic and roman numbers!");
-
-        try { // case if in input roman numbers like XX, XI ... which passing input regex
-            int operand1 = romanNumeralMapInput.get(tokens[0]);// try to get numeric value from Map by roman as key
-            int operand2 = romanNumeralMapInput.get(tokens[2]);
-        } catch (Exception e) {
-            throw new Exception("Wrong input: roman operand is greater then 10!");
-        }
-
     }
 
-    public static Boolean isInputRoman(String[] tokens) {
+    public static Boolean isInputRoman(String[] tokens) throws Exception {
+        String message = "Input is not valid: roman num > 10!";
+        if (!romanNumeralMapInput.containsKey(tokens[0]) && tokens[0].matches("^[IVXLCDM]+$")) throw new Exception(message);
+        if (!romanNumeralMapInput.containsKey(tokens[2]) && tokens[2].matches("^[IVXLCDM]+$")) throw new Exception(message);
         return romanNumeralMapInput.containsKey(tokens[0]) && romanNumeralMapInput.containsKey(tokens[2]);
     }
 
@@ -109,7 +118,7 @@ class Main {
 class RomanOutput {
     static Map<Integer, String> romanNumeralMapForOutput;
     RomanOutput() { // constructor
-        romanNumeralMapForOutput = new HashMap<>();
+        romanNumeralMapForOutput = new HashMap<>(100);
         romanNumeralMapForOutput.put(1, "I");
         romanNumeralMapForOutput.put(2, "II");
         romanNumeralMapForOutput.put(3, "III");
@@ -220,7 +229,7 @@ class RomanOutput {
         romanNumeralMapForOutput.put(99, "XCIX");
         romanNumeralMapForOutput.put(100, "C");
     }
-    public static String romanFromArabic (int num) {
+      String romanFromArabic (int num) {
         return romanNumeralMapForOutput.get(num); // roman num 3->"III"
     }
 }
