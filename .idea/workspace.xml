@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d7318864-96a9-447e-ad84-d769220a25e5" name="Changes" comment="feat: if-else add for roman and arabic calc choose">
+    <list default="true" id="d7318864-96a9-447e-ad84-d769220a25e5" name="Changes" comment="fix: minor fix, comment add">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
@@ -47,7 +47,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1680809098247</updated>
-      <workItem from="1680809100051" duration="12509000" />
+      <workItem from="1680809100051" duration="16067000" />
     </task>
     <task id="LOCAL-00001" summary="feat: isInputValid add">
       <created>1680815125476</created>
@@ -84,7 +84,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680899290264</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="fix: minor fix, comment add">
+      <created>1680900127911</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1680900127912</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -107,6 +114,7 @@
     <MESSAGE value="feat: arabicCalc add" />
     <MESSAGE value="refactor: change to new Switch syntax in arabicCalc" />
     <MESSAGE value="feat: if-else add for roman and arabic calc choose" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: if-else add for roman and arabic calc choose" />
+    <MESSAGE value="fix: minor fix, comment add" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: minor fix, comment add" />
   </component>
 </project>

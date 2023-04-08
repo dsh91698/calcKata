@@ -1,6 +1,35 @@
+import java.util.Map;
 import java.util.Scanner;
 
 class Main {
+
+    static Map<String, Integer> romanNumeralMapInput = Map.of(
+            "I", 1,
+            "II", 2,
+            "III", 3,
+            "IV", 4,
+            "V", 5,
+            "VI", 6,
+            "VII", 7,
+            "VIII", 8,
+            "IX", 9,
+            "X", 10
+    );
+
+    static Map<String, Integer> arabicNumeralMapInput = Map.of(
+            "1", 1,
+            "2", 2,
+            "3", 3,
+            "4", 4,
+            "5", 5,
+            "6", 6,
+            "7", 7,
+            "8", 8,
+            "9", 9,
+            "10", 10
+    );
+
+
 
     public static void main(String[] args) throws Exception{
         Scanner input = new Scanner(System.in);
@@ -50,6 +79,12 @@ class Main {
     }
 
     public static Boolean isInputRoman(String[] tokens) {
+        if (romanNumeralMapInput.containsKey(tokens[0]) && romanNumeralMapInput.containsKey(tokens[2])) {
+            return true;
+        }
+//        else {
+//            System.out.println("The map does not contain the key 'II'");
+//        }
         return false;
     }
 
